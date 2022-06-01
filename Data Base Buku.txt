@@ -1,0 +1,22 @@
+209 1 Fisika Mekanika
+310 2 Pemrograman lanjut
+129 0 Aljabar Linear
+422 0 Biologi
+879 2 Matematika
+637 0 Seni
+983 1 Fisika Listrik
+123231 2 Bahasa Sunda
+121321 1 Bahasa Jerman
+12343 1 Tafsir Buku
+3233 2 Panduan Komputer
+2013 1 Algoritma
+731 3 Statistika
+399 2 MPKT
+543 3 Profesionalisme
+294 1 PKN
+395 2 IPS
+83 2 Budaya
+877 1 Buku Cerita
+424 2 Etika
+753 3 Buku Bahasa Indonesia
+753 3 Buku Sejarah Inggris

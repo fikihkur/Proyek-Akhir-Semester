@@ -1,0 +1,6 @@
+7 3 7 4 18 FT 2106731200 0 Abdul Fikih Kurnia
+2 5 2 6 13 FT 2106631961 1 Luthfi Misbachul
+7 4 7 5 0 FT 2106639472 2 Albertus Timothy
+3 6 3 7 2 FT 2106639472 3 Albertus Timothy
+2 2 2 3 11 FT 210669329 2 Albertus Timothy
+4 3 4 4 8 FT 219491221 2 Albertus Timothy
