@@ -50,7 +50,7 @@ nanyaakun: // program akan kembali kesini ketika memanggil goto nanyaakun
 
 	if (input == 1)
 	{ // jika user login sebagai admin
-		adminAkses(ptr, data, mahasiswa);
+		adminAkses(ptr, data, mahasiswa, root);
 	}
 	else if (input == 2)
 	{ // jika user login sebagai mahasiswa

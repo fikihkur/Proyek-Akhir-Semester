@@ -294,11 +294,11 @@ balik: // titik tuju goto balik
 }
 
 // func adminAkses untuk masuk kedalam func admin
-void adminAkses(FILE *ptr, Buku *data, Account *database)
+void adminAkses(FILE *ptr, Buku *data, Account *database, struct biodata *root)
 {
 	int pil;
 	system("cls");
-	while (pil != 6)
+	while (pil != 7)
 	{
 		printf("===================================\n"
 			   "|~ ~ ~ Aplikasi Perpustakaan ~ ~ ~|\n"
@@ -308,13 +308,14 @@ void adminAkses(FILE *ptr, Buku *data, Account *database)
 			   "|   2. Daftar Buku                |\n"
 			   "|   3. Status Peminjaman Buku     |\n"
 			   "|   4. Permintaan Buku            |\n"
-			   "|   5. Panduan Aplikasi           |\n"
-			   "|   6. EXIT                       |\n"
+			   "|   5. Lihat Biodata              |\n"
+			   "|   6. Panduan Aplikasi           |\n"
+			   "|   7. EXIT                       |\n"
 			   "===================================\n\n"
-			   "Masukkan Pilihan [ 1 s.d. 6 ] = ");
+			   "Masukkan Pilihan [ 1 s.d. 7 ] = ");
 		scanf("%d", &pil);
 
-		while (pil < 1 || pil > 6)
+		while (pil < 1 || pil > 7)
 		{ // eror handling
 			error();
 			printf("Mohon Masukkan Pilihan dengan benar!: ");
@@ -343,10 +344,15 @@ void adminAkses(FILE *ptr, Buku *data, Account *database)
 			system("CLS");				 // membersihkan layar display
 			break;
 		case 5:
-			panduanAdmin(); // melihat panduan program
+			bridgeBio(ptr, root);
+			system("pause");			 // menjeda program sampai ada input
+			system("CLS");				 // membersihkan layar display
 			break;
 		case 6:
-			closing();
+			panduanAdmin(); // melihat panduan program
+			break;
+		case 7:
+		//	closing();
 			exit(0);
 		default:
 			error();
@@ -682,6 +688,66 @@ void lihatReqBuku(FILE *ptr, Account *database)
 	printf("\n");
 }
 
+void bridgeBio(FILE *ptr, struct biodata *root){
+	
+	int i=0, pil, k=0;
+	char nama[50], NPM[15], jurusan[25], tempatLahir[25], tanggalLahir[15], akun[50], pass[50], akunFile[50];
+
+	ptr = fopen("biodata_mahasiswa.txt", "r");
+	if (ptr != NULL)
+	{
+		while (fscanf(ptr, " %50[^\n]s", akunFile) == 1 && fscanf(ptr, " %50[^\n]s", nama) == 1 && fscanf(ptr, " %15[^\n]s", NPM) == 1 && fscanf(ptr, " %25[^\n]s", jurusan) == 1 && fscanf(ptr, " %25[^\n]s", tempatLahir) == 1 && fscanf(ptr, " %15[^\n]s", tanggalLahir) == 1)
+		{
+			insertChild(&root, nama, NPM, jurusan, tempatLahir, tanggalLahir, akunFile);
+		}
+	}
+	system("cls");
+	printf("|==== Daftar Anggota Perpustakaan ====|\n\n");
+	lihatBioMhs(ptr, root, i);// prrint nama
+	printf("\nMasukkan Nomor Mahasiswa : ");
+	scanf("%d", &pil);
+	
+
+	ptr = fopen("biodata_mahasiswa.txt", "r");
+	if (ptr != NULL)
+	{
+		while (fscanf(ptr, " %50[^\n]s", akunFile) == 1 && fscanf(ptr, " %50[^\n]s", nama) == 1 && fscanf(ptr, " %15[^\n]s", NPM) == 1 && fscanf(ptr, " %25[^\n]s", jurusan) == 1 && fscanf(ptr, " %25[^\n]s", tempatLahir) == 1 && fscanf(ptr, " %15[^\n]s", tanggalLahir) == 1)
+		{
+			insertChild(&root, nama, NPM, jurusan, tempatLahir, tanggalLahir, akunFile);
+			k++;
+			if(k == pil){
+				system("cls");
+				// menampilkan output kartu peminjaman
+				printf(" ======================================================\n"
+			  		   " |-------------- Kartu Keanggotaan Aktif -------------|\n"
+			   " |---------------- E-Library Mahasiswa ---------------|\n"
+			   " ======================================================\n");
+				printf(" | %-20s : %-27s |\n", "Username", akunFile);
+				printf(" | %-20s : %-27s |\n", "Nama Lengkap", nama);
+				printf(" | %-20s : %-27s |\n", "NPM", NPM);
+				printf(" | %-20s : %-27s |\n", "Jurusan", jurusan);
+				printf(" | %-20s : %-27s |\n", "Tempat Lahir", tempatLahir);
+				printf(" | %-20s : %-27s |\n", "Tanggal Lahir", tanggalLahir);
+				printf(" | %-20s   %-27s |\n", " ", " ");
+				printf(" |  %-20s  %-27s |\n", "Salam Hangat", " ");
+				printf(" | %-15s%-5c   %-27s |\n", "Administrator", 1, " ");
+				printf(" | %-20s   %-27s |\n", " ", " ");
+				printf(" ======================================================\n");
+			}
+		}
+	}
+}
+void lihatBioMhs(FILE *ptr, struct biodata *root, int i){
+
+	if (root != NULL)
+	{
+		lihatBioMhs(ptr, root->leftPtr, i++);
+
+		printf("%d. %s\n", i, root->nama);
+		
+		lihatBioMhs(ptr, root->rightPtr,i++);
+	}
+}
 // func mahasiswaAkses untuk masuk ke dalam func mahasiswa
 void mahasiswaAkses(FILE *ptr, Buku *data, Account *database, struct biodata *root, int account)
 {
@@ -1438,6 +1504,7 @@ void lihatKartu(FILE *ptr, struct biodata *root, int account){
 	else if (searchAccountBST(root, akun) == 1){
 		kartuAnggota(root, akun);
 		}
+	fclose(ptr);
 }
 void kartuAnggota(struct biodata *root, char akun[])
 {

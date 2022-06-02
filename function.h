@@ -46,7 +46,7 @@ int loginAccount(FILE *ptr, Account *database, int inOrUp);
 void newAccount(FILE *ptr, Account *database);
 
 // prototype func adminAkses agar dapat mengakses fitur admin
-void adminAkses(FILE *ptr, Buku *data, Account *database);
+void adminAkses(FILE *ptr, Buku *data, Account *database, struct biodata *root);
 
 // prototype func inputBuku untuk menginput buku yang nantinya akan disimpan ke dalam file
 void inputBuku(FILE *ptr, Buku *data, Account *database);
@@ -80,6 +80,10 @@ void reqBuku(FILE *ptr, int account);
 
 // Prototype func balikBuku untuk menu mengembalikan buku
 void balikBuku(FILE *ptr, Buku *data, Account *database, int account);
+
+void bridgeBio(FILE *ptr, struct biodata *root);
+
+void lihatBioMhs(FILE *ptr, struct biodata *root, int i);
 
 void inputBiodata(FILE *ptr, struct biodata *root, int account);
 
