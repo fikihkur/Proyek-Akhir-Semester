@@ -687,24 +687,25 @@ void mahasiswaAkses(FILE *ptr, Buku *data, Account *database, struct biodata *ro
 {
 	int pil;
 	system("cls");
-	while (pil != 7)
+	while (pil != 8)
 	{
 		printf("=====================================\n"
 			   "|~ ~ ~ Aplikasi Perpustakaan ~ ~ ~ ~|\n"
 			   "|~ ~ ~ ~ ~ Menu Mahasiswa ~ ~ ~ ~ ~ |\n"
 			   "|-----------------------------------|\n"
 			   "|   1. Input Biodata                |\n"
-			   "|   2. Daftar Buku                  |\n"
-			   "|   3. Peminjaman Buku              | \n"
-			   "|   4. Pengembalian Buku            | \n"
-			   "|   5. Request Buku                 |\n"
-			   "|   6. Panduan Aplikasi             | \n"
-			   "|   7. EXIT                         | \n"
+			   "|   2. Lihat Biodata                |\n"
+			   "|   3. Daftar Buku                  |\n"
+			   "|   4. Peminjaman Buku              | \n"
+			   "|   5. Pengembalian Buku            | \n"
+			   "|   6. Request Buku                 |\n"
+			   "|   7. Panduan Aplikasi             | \n"
+			   "|   8. EXIT                         | \n"
 			   "=====================================\n\n"
-			   "Masukkan Pilihan [ 1 s.d. 7 ] : ");
+			   "Masukkan Pilihan [ 1 s.d. 8 ] : ");
 		scanf("%d", &pil);
 
-		while (pil < 1 || pil > 7)
+		while (pil < 1 || pil > 8)
 		{ // error handling
 			error();
 			printf(" Mohon Masukkan Pilihan dengan benar !: ");
@@ -719,30 +720,35 @@ void mahasiswaAkses(FILE *ptr, Buku *data, Account *database, struct biodata *ro
 			system("pause"); // menjeda program sampai ada input
 			system("CLS");	 // membersihkan layar display
 			break;
-		case 2:					   // jika pilihan 1
+		case 2:
+			lihatKartu(ptr, root, account);
+			system("pause"); // menjeda program sampai ada input
+			system("CLS");	 // membersihkan layar display
+			break;			
+		case 3:					   // jika pilihan 1
 			daftarBuku(ptr, data); // memanggil fungsi daftarBuku
 			system("pause");	   // menjeda program sampai ada input
 			system("CLS");		   // membersihkan layar display
 			break;
-		case 3: // jika pilihan 2
+		case 4: // jika pilihan 2
 			system("cls");
 			pinjamBuku(ptr, data, database, account); // memanggil fungsi pinjamBuku
 			system("CLS");
 			break;
-		case 4:										 // jika pilihan 3
+		case 5:										 // jika pilihan 3
 			balikBuku(ptr, data, database, account); // memanggil fungsi balikBuku
 			system("pause");						 // menjeda program sampai ada input
 			system("CLS");							 // membersihkan layar display
 			break;
-		case 5:					   // jika pilihan 4
+		case 6:					   // jika pilihan 4
 			reqBuku(ptr, account); // memanggil fungsi request buku
 			system("CLS");
 			break;
-		case 6:					// jika pilihan 5
+		case 7:					// jika pilihan 5
 			panduanMahasiswa(); // memanggil fungsi panduan aplikasi mahasiswa
 			break;
-		case 7: // jika pilihan 6
-			closing();
+		case 8: // jika pilihan 6
+		//	closing();
 			exit(0);
 		default: // error handling
 			error();
@@ -1211,13 +1217,14 @@ void inputBiodata(FILE *ptr, struct biodata *root, int account)
 		scanf("%*c%[^\n]", tempatLahir);
 		printf("Tanggal Lahir: ");
 		scanf("%*c%[^\n]", tanggalLahir);
+		
+		insertChild(&root, nama, NPM, jurusan, tempatLahir, tanggalLahir, akun);
+		kartuAnggota(root, akun);
 
 		printf("Apakah Data Diri Anda Sudah Sesuai?\n1. Ya\t2. Tidak\nMasukkan Pilihan: ");
 		scanf("%d", &pil);
 		if (pil == 1)
 		{
-			insertChild(&root, nama, NPM, jurusan, tempatLahir, tanggalLahir, akun);
-			kartuAnggota(root, akun);
 			ptr = fopen("biodata_mahasiswa.txt", "w");
 			saveBiodata(ptr, root);
 			fclose(ptr);
@@ -1406,8 +1413,35 @@ struct biodata *delete (struct biodata *root, char akun[])
 	return root;
 }
 
+void lihatKartu(FILE *ptr, struct biodata *root, int account){
+	int i, pil, descision;
+	char nama[50], NPM[15], jurusan[25], tempatLahir[25], tanggalLahir[15], akun[50], pass[50], akunFile[50];
+
+	ptr = fopen("Account Mahasiswa.txt", "r");
+	for (i = 0; i <= account; i++)
+	{
+		fscanf(ptr, "%s %[^\n]s", &pass, &akun);
+	}
+	fclose(ptr);
+
+	ptr = fopen("biodata_mahasiswa.txt", "r");
+	if (ptr != NULL)
+	{
+		while (fscanf(ptr, " %50[^\n]s", akunFile) == 1 && fscanf(ptr, " %50[^\n]s", nama) == 1 && fscanf(ptr, " %15[^\n]s", NPM) == 1 && fscanf(ptr, " %25[^\n]s", jurusan) == 1 && fscanf(ptr, " %25[^\n]s", tempatLahir) == 1 && fscanf(ptr, " %15[^\n]s", tanggalLahir) == 1)
+		{
+			insertChild(&root, nama, NPM, jurusan, tempatLahir, tanggalLahir, akunFile);
+		}
+	}
+	if (searchAccountBST(root, akun) == -1){
+		printf("\n Biodata Anda Masih Kosong\n");
+		}
+	else if (searchAccountBST(root, akun) == 1){
+		kartuAnggota(root, akun);
+		}
+}
 void kartuAnggota(struct biodata *root, char akun[])
 {
+	system("cls");
 	if (strcmp(root->account, akun) == 0)
 	{
 		// menampilkan output kartu peminjaman

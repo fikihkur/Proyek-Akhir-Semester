@@ -95,6 +95,8 @@ struct biodata *delete (struct biodata *root, char akun[]);
 
 void kartuAnggota(struct biodata *root, char akun[]);
 
+void lihatKartu(FILE *ptr, struct biodata *root, int account);
+
 // prototye func error untuk menampilkan output ketika program error
 void error();
 
