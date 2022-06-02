@@ -1506,7 +1506,7 @@ void lihatKartu(FILE *ptr, struct biodata *root, int account){
 		}
 	fclose(ptr);
 }
-void kartuAnggota(struct biodata *root, char akun[])
+void kartuAnggota(struct biodata *root, char *akun)
 {
 	system("cls");
 	if (strcmp(root->account, akun) == 0)
