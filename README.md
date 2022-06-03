@@ -43,8 +43,8 @@ Manfaat Program:
 <br /> 4. Setiap mahasiswa hanya dapat login dengan username dan passwordnya saja, sehingga Administrator dapat melakukan identifikasi
 dengan mudah dalam melakukan aktivitas di dalam aplikasi
 
-Proyek ahir semester ini merupakan pengembangan dari proyek tengah semester kelompok kami. Untuk hal yang dikembangkan yaitu terdapat pada fitur mahasiswa poin 1 dan 2 serta 
-pada fitur administrator poin 5. Pengembangan tersebut dilakukan dengan prinsip Binary Tree (BT) dan menjadi salah satu kriteria penilaian proyek ini.
+Proyek ahir semester ini merupakan pengembangan dari proyek tengah semester kelompok kami. Untuk hal yang dikembangkan sesuai dengan kriteria penilaian yaitu terdapat pada fitur mahasiswa poin 1 dan 2 serta 
+pada fitur administrator poin 5. Pengembangan tersebut dilakukan dengan prinsip Binary Tree (BT) dan semua kriteria penilaian di dalam proyek akhir ini.
 <br /> Untuk lebih jelasnya mengenai penjelasan program dapat menonton video penjelasan di bawah ini:
 <br /> https://youtu.be/GBnX0RQn22c
 
