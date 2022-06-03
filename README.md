@@ -33,6 +33,13 @@ Fitur Administrator :
 <br /> 6. Administrator dapat melihat panduan penggunaan aplikasi
 <br /> 7. Administrator dapat keluar dari aplikasi dengan data perubahan yang tersimpan di dalam file
 
+Manfaat Program:
+<br /> 1. Memudahkan Administrator di dalam sistem administrasi perpustakaan
+<br /> 2. Memudahkan mahasiswa di dalam melakukan aktivitas kegiatan di perpustakaan
+<br /> 3. Sistem perpustakaan dapat menyimpan data kedalam file tidak temporary
+<br /> 4. Setiap mahasiswa hanya dapat login dengan username dan passwordnya saja, sehingga Administrator dapat melakukan identifikasi
+dengan mudah dalam melakukan aktivitas di dalam aplikasi
+
 Proyek ahir semester ini merupakan pengembangan dari proyek tengah semester kelompok kami. Untuk hal yang dikembangkan yaitu terdapat pada fitur mahasiswa poin 1 dan 2 serta 
 pada fitur administrator poin 5. Pengembangan tersebut dilakukan dengan prinsip Binary Tree (BT) dan menjadi salah satu kriteria penilaian proyek ini.
 <br /> Untuk lebih jelasnya mengenai penjelasan program dapat menonton video penjelasan di bawah ini:
