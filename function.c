@@ -10,7 +10,8 @@ void opening()
 	system("CLS");		// Membersihkan layar
 	Sleep(800);			// menjeda program selama 0.8 detik
 	system("color F0"); // memberikan warna pada layar
-
+	
+	//mengeprint opening 
 	printf("\n\n\n\n\n\n\n");
 	char a[] = {"\t\t\t\t\t\t\t\t\t\t=================================================\n"
 				"\t\t\t\t\t\t\t\t\t\t|--------- Selamat Datang  Di Aplikasi ---------|\n"
@@ -688,26 +689,28 @@ void lihatReqBuku(FILE *ptr, Account *database)
 	printf("\n");
 }
 
+// func bridgeBio sebagai jembatan antara file pointer dengan data dalam program
 void bridgeBio(FILE *ptr, struct biodata *root){
-	
 	int i=0, pil, k=0;
+	//char data yang akan kesimpan ke dalam temp untuk mengeprint data yang dipilih
 	char nama[50], NPM[15], jurusan[25], tempatLahir[25], tanggalLahir[15], akun[50], pass[50], akunFile[50];
-
+	
+	//membuka file biodata mahasiswa
 	ptr = fopen("biodata_mahasiswa.txt", "r");
 	if (ptr != NULL)
 	{
+		//mengscan serta memindahkan data dari file pointer ke program dalam insertchild
 		while (fscanf(ptr, " %50[^\n]s", akunFile) == 1 && fscanf(ptr, " %50[^\n]s", nama) == 1 && fscanf(ptr, " %15[^\n]s", NPM) == 1 && fscanf(ptr, " %25[^\n]s", jurusan) == 1 && fscanf(ptr, " %25[^\n]s", tempatLahir) == 1 && fscanf(ptr, " %15[^\n]s", tanggalLahir) == 1)
-		{
+		{	
 			insertChild(&root, nama, NPM, jurusan, tempatLahir, tanggalLahir, akunFile);
 		}
 	}
 	system("cls");
 	printf("|==== Daftar Anggota Perpustakaan ====|\n\n");
-	lihatBioMhs(ptr, root, i);// prrint nama
+	lihatBioMhs(ptr, root, i);// mengcall func lihatBioMhs untuk mengeprint username data dan untuk memilih
 	printf("\nMasukkan Nomor Mahasiswa : ");
-	scanf("%d", &pil);
+	scanf("%d", &pil); //mengscan pilihan mahasiswa yang ingin dilihat
 	
-
 	ptr = fopen("biodata_mahasiswa.txt", "r");
 	if (ptr != NULL)
 	{
@@ -715,6 +718,7 @@ void bridgeBio(FILE *ptr, struct biodata *root){
 		{
 			insertChild(&root, nama, NPM, jurusan, tempatLahir, tanggalLahir, akunFile);
 			k++;
+			//akan mencari username yang dipilih untuk mengambil datanya serta mengeprint biodata tersebut
 			if(k == pil){
 				system("cls");
 				// menampilkan output kartu peminjaman
@@ -737,23 +741,25 @@ void bridgeBio(FILE *ptr, struct biodata *root){
 		}
 	}
 }
-void lihatBioMhs(FILE *ptr, struct biodata *root, int i){
 
+//func lihatBioMhs untuk mengeprint pilihan nama pada biodata 
+void lihatBioMhs(FILE *ptr, struct biodata *root, int i){
+	//bentuk code berupa rekursi untuk menyesuaikan data yang terletak di binary search tree 
 	if (root != NULL)
 	{
 		lihatBioMhs(ptr, root->leftPtr, i++);
-
 		printf("%d. %s\n", i, root->nama);
-		
 		lihatBioMhs(ptr, root->rightPtr,i++);
 	}
 }
+
 // func mahasiswaAkses untuk masuk ke dalam func mahasiswa
 void mahasiswaAkses(FILE *ptr, Buku *data, Account *database, struct biodata *root, int account)
 {
 	int pil;
 	system("cls");
 	while (pil != 8)
+	//menu untuk memilih menu pada bagian mahasiswa
 	{
 		printf("=====================================\n"
 			   "|~ ~ ~ Aplikasi Perpustakaan ~ ~ ~ ~|\n"
@@ -1129,6 +1135,7 @@ void balikBuku(FILE *ptr, Buku *data, Account *database, int account)
 	}
 	fclose(ptr);
 
+	//membuka file pointer bernama Data Peminjam
 	ptr = fopen("Data Peminjam.txt", "r");
 	if (ptr == NULL)
 	{
@@ -1247,18 +1254,21 @@ void balikBuku(FILE *ptr, Buku *data, Account *database, int account)
 	}
 }
 
+//func inputBiodata untuk mengisi biodata tiap akun yang sedang login
 void inputBiodata(FILE *ptr, struct biodata *root, int account)
 {
 	int i, pil, descision;
 	char nama[50], NPM[15], jurusan[25], tempatLahir[25], tanggalLahir[15], akun[50], pass[50], akunFile[50];
-
+	
+	//membuka file account mahasiswa untuk mencopy isi data dari file ke program berupa akun login mahasiswa
 	ptr = fopen("Account Mahasiswa.txt", "r");
 	for (i = 0; i <= account; i++)
 	{
 		fscanf(ptr, "%s %[^\n]s", &pass, &akun);
 	}
 	fclose(ptr);
-
+	
+	//membuka file biodata untuk mendapat data dari file ke program berupa biodata mahasiswa
 	ptr = fopen("biodata_mahasiswa.txt", "r");
 	if (ptr != NULL)
 	{
@@ -1267,7 +1277,9 @@ void inputBiodata(FILE *ptr, struct biodata *root, int account)
 			insertChild(&root, nama, NPM, jurusan, tempatLahir, tanggalLahir, akunFile);
 		}
 	}
-
+	
+	//memanggil func searchAccountBST untuk menyocokkan akun login mahasiswa dengan biodata yang akan diinput
+	//jika pada akun tersebut belum ada biodata, maka program otomatis akan membuat biodata untuk akun tersebut
 	if (searchAccountBST(root, akun) == -1)
 	{
 	prev:
@@ -1285,21 +1297,27 @@ void inputBiodata(FILE *ptr, struct biodata *root, int account)
 		scanf("%*c%[^\n]", tanggalLahir);
 		
 		insertChild(&root, nama, NPM, jurusan, tempatLahir, tanggalLahir, akun);
+		//memanggil func kartuAnggota untuk mengeprint biodata mahasiswa yang sedang diinput
 		kartuAnggota(root, akun);
-
+		
+		//mengkonfirmasi apakah data sudah sesuai atau belum
 		printf("Apakah Data Diri Anda Sudah Sesuai?\n1. Ya\t2. Tidak\nMasukkan Pilihan: ");
 		scanf("%d", &pil);
 		if (pil == 1)
 		{
+			//jika biodata yang dimasukan telah sesuai maka akan disimpan dalam program dan akan di save pada file pointer
 			ptr = fopen("biodata_mahasiswa.txt", "w");
 			saveBiodata(ptr, root);
 			fclose(ptr);
 		}
 		else
 		{
+			//jika data belum sesuai, maka akan kembali untuk mengisi biodata kembali ke bagian prev
 			goto prev;
 		}
 	}
+	//jika pada akun tersebut ditemukan biodata pada akun tersebut, maka akan ditanyakan 
+	//untuk mengganti data tersebut atau tidak
 	else if (searchAccountBST(root, akun) == 1)
 	{
 		do
@@ -1308,7 +1326,9 @@ void inputBiodata(FILE *ptr, struct biodata *root, int account)
 			printf("Apakah Anda ingin Mengubah Biodata Anda Sebelumnya?\n1. Ya\t2. Tidak\nMasukkan Pilihan: ");
 			scanf("%d", &descision);
 		} while (descision < 1 || descision > 2);
-
+		
+		//jika pilihan 1 maka akan menghapus biodata pada Binary Search Tree sesuai akun tersebut
+		//dan membuat biodata baru untuk akun yang sedang login
 		if (descision == 1)
 		{
 		back:
@@ -1330,7 +1350,7 @@ void inputBiodata(FILE *ptr, struct biodata *root, int account)
 			freopen("biodata_mahasiswa.txt", "w", ptr);
 			saveBiodata(ptr, root);
 			fclose(ptr);
-
+			
 			printf("Apakah Data Diri Anda Sudah Sesuai?\n1. Ya\t2. Tidak\nMasukkan Pilihan: ");
 			scanf("%d", &pil);
 			if (pil == 2)
@@ -1341,23 +1361,26 @@ void inputBiodata(FILE *ptr, struct biodata *root, int account)
 	}
 }
 
+//func saveBiodata digunakan untuk menyinpam data pada binary search tree yang akan 
+//di sesuaikan data tersebut ke kanan atau kiri head utama
 void saveBiodata(FILE *ptr, struct biodata *root)
 {
-
 	if (root != NULL)
 	{
 		saveBiodata(ptr, root->leftPtr);
-
+		//dalam func ini juga akan menyimpan data dari program kedalam file pointer
 		fprintf(ptr, "%s\n%s\n%s\n%s\n%s\n%s\n", root->account, root->nama, root->NPM, root->jurusan, root->tempatLahir, root->tanggalLahir);
 		saveBiodata(ptr, root->rightPtr);
 	}
 }
 
+//func insertChild digunakan untuk menyimpan suatu biodata ke dalam accoun yang sedang login
 void insertChild(struct biodata **root, char nama[], char NPM[], char jurusan[], char tempatLahir[], char tanggalLahir[], char akun[])
 {
 	struct biodata *ptr = malloc(sizeof(struct biodata));
 	struct biodata *curPtr = *root;
-
+	
+	//biodata yang diisi akan di copy ke dalam Binary Search Tree dengan metode strcpy
 	strcpy(ptr->nama, nama);
 	strcpy(ptr->NPM, NPM);
 	strcpy(ptr->jurusan, jurusan);
@@ -1366,7 +1389,7 @@ void insertChild(struct biodata **root, char nama[], char NPM[], char jurusan[],
 	strcpy(ptr->account, akun);
 	ptr->leftPtr = NULL;
 	ptr->rightPtr = NULL;
-
+	
 	if (*root == NULL)
 	{
 		*root = ptr;
@@ -1384,6 +1407,7 @@ void insertChild(struct biodata **root, char nama[], char NPM[], char jurusan[],
 	}
 }
 
+//func searchAccounBST digunakan untuk menentukan serta mencari akun yang sedang login dengan biodata dalam Binary Search Tree
 int searchAccountBST(struct biodata *root, char akun[])
 {
 	if (root == NULL)
@@ -1404,6 +1428,7 @@ int searchAccountBST(struct biodata *root, char akun[])
 	}
 }
 
+
 struct biodata *minValueNode(struct biodata *node)
 {
 	struct biodata *current = node;
@@ -1415,6 +1440,7 @@ struct biodata *minValueNode(struct biodata *node)
 	return current;
 }
 
+//func biodata delete ini digunakan untuk menghapus biodata pada binary search tree
 struct biodata *delete (struct biodata *root, char akun[])
 {
 	// base case
@@ -1479,10 +1505,11 @@ struct biodata *delete (struct biodata *root, char akun[])
 	return root;
 }
 
+//func lihatKartu digunakan untuk menentukan apakah pada akun tersebut telah terisi biodata atau belum
 void lihatKartu(FILE *ptr, struct biodata *root, int account){
 	int i, pil, descision;
 	char nama[50], NPM[15], jurusan[25], tempatLahir[25], tanggalLahir[15], akun[50], pass[50], akunFile[50];
-
+	
 	ptr = fopen("Account Mahasiswa.txt", "r");
 	for (i = 0; i <= account; i++)
 	{
@@ -1498,14 +1525,18 @@ void lihatKartu(FILE *ptr, struct biodata *root, int account){
 			insertChild(&root, nama, NPM, jurusan, tempatLahir, tanggalLahir, akunFile);
 		}
 	}
+	//jika tidak ditemukan data biodata pada akun tersebut maka akan mengeprint biodata masih kosong
 	if (searchAccountBST(root, akun) == -1){
 		printf("\n Biodata Anda Masih Kosong\n");
 		}
+	//jika telah ditemukan, maka akan memanggil func kartuAnggota untuk mengeprint data biodata tersebut
 	else if (searchAccountBST(root, akun) == 1){
 		kartuAnggota(root, akun);
 		}
 	fclose(ptr);
 }
+
+//func kartuAnggota digunakan untuk mengeprint seluruh isi biodata mahasiswa
 void kartuAnggota(struct biodata *root, char *akun)
 {
 	system("cls");

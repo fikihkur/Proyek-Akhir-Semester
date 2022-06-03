@@ -15,7 +15,8 @@ int main()
 	Account *admin = (Account *)calloc(100, sizeof(Account));
 	// pembuatan pointer dari struct Buku bernama data
 	Buku *data = (Buku *)calloc(100, sizeof(Buku));
-
+	
+	// pembuatan pointer root untuk data dari binary search tree
 	struct biodata *root = NULL;
 
 	// untuk memberikan informasi jika memory untuk pointer tidak tercukupi
