@@ -1532,7 +1532,7 @@ void lihatKartu(FILE *ptr, struct biodata *root, int account)
 	// jika tidak ditemukan data biodata pada akun tersebut maka akan mengeprint biodata masih kosong
 	if (searchAccountBST(root, akun) == -1)
 	{
-		printf("\n Biodata Anda Masih Kosong\n");
+		printf("\n|---! Biodata Anda Masih Kosong !---|\n\n");
 	}
 	// jika telah ditemukan, maka akan memanggil func kartuAnggota untuk mengeprint data biodata tersebut
 	else if (searchAccountBST(root, akun) == 1)
