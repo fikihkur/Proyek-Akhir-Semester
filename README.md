@@ -12,7 +12,7 @@ Assalamualaikum wr. wb. Salam sehat untuk kita semua.
 memberikan ilmu yang bermanfaat sehingga kami dapat menyelesaikan proyek akhir semester ini dengan baik sebab telah memenuhi semua 
 kriteria yang dipersyaratkan.
 
-## Penjelasam Program
+## Penjelasan Program
 Kelompok kami mengusung ide berupa "E-Library", dimana program ini akan mengimpelementasikan sebuah sistem perpustakaan masa kini yang
 memiliki banyak sekali fitur di dalamnya dan tentunya akan bermanfaat bagi kita semua. Terdapat 2 fitur utama yaitu fitur login sebagai mahasiswa dan sebagai administrator, didalam fitur
 utama tersebutlah terdapat fitur fitur lainnya. Fitur-fiturnya yaitu sebagai berikut:
