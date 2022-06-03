@@ -36,8 +36,7 @@ Fitur Administrator :
 Proyek ahir semester ini merupakan pengembangan dari proyek tengah semester kelompok kami. Untuk hal yang dikembangkan yaitu terdapat pada fitur mahasiswa poin 1 dan 2 serta 
 pada fitur administrator poin 5. Pengembangan tersebut dilakukan dengan prinsip Binary Search Tree (BST) dan menjadi salah satu kriteria penilaian proyek ini.
 <br /> Untuk lebih jelasnya mengenai penjelasan program dapat menonton video penjelasan di bawah ini:
-<br /> (link)
-<br /> (link)
+<br /> https://youtu.be/GBnX0RQn22c
 
 Itulah proyek akhir semester yang telah kami selesaikan dan telah memenuhi semua kriteria yang disediakan. Terima kasih, Wassallamualaikum wr. wb.
 
