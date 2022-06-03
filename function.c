@@ -1400,7 +1400,7 @@ void insertChild(struct biodata **root, char nama[], char NPM[], char jurusan[],
 	}
 	else
 	{
-		if (strcmp((*root)->account, ptr->account) >= 0)
+		if (strcmp((*root)->account, ptr->account) >= 0) 
 		{
 			insertChild(&((*root)->leftPtr), nama, NPM, jurusan, tempatLahir, tanggalLahir, akun);
 		}
@@ -1414,29 +1414,30 @@ void insertChild(struct biodata **root, char nama[], char NPM[], char jurusan[],
 // func searchAccounBST digunakan untuk menentukan serta mencari akun yang sedang login dengan biodata dalam Binary Search Tree
 int searchAccountBST(struct biodata *root, char akun[])
 {
-	if (root == NULL)
+	if (root == NULL) //jika node null
 	{
 		return -1;
 	}
-	if (strcmp(root->account, akun) == 0)
+	if (strcmp(root->account, akun) == 0) //jika root->account sama dengan akun
 	{
 		return 1;
 	}
-	else if (strcmp(root->account, akun) > 0)
+	else if (strcmp(root->account, akun) > 0) //jika root->account lebih besar dari akun
 	{
 		searchAccountBST(root->leftPtr, akun);
 	}
-	else
+	else //jika root->account lebih kecil dari akun
 	{
-		searchAccountBST(root->rightPtr, akun);
+		searchAccountBST(root->rightPtr, akun); 
 	}
 }
 
+//Func untuk mencari root paling kiri
 struct biodata *minValueNode(struct biodata *node)
 {
 	struct biodata *current = node;
 
-	/* loop down to find the leftmost leaf */
+	//loop ke bawah mencari nilai paling kiri
 	while (current && current->leftPtr != NULL)
 		current = current->leftPtr;
 
@@ -1450,36 +1451,31 @@ struct biodata *delete (struct biodata *root, char akun[])
 	if (root == NULL)
 		return root;
 
-	// If the key to be deleted
-	// is smaller than the root's
-	// key, then it lies in left subtree
+	// jika akun lebih kecil dari root->account maka yang di hapus adalah root sebalah kiri
 	if (strcmp(akun, root->account) < 0)
 		root->leftPtr = delete (root->leftPtr, akun);
 
-	// If the key to be deleted
-	// is greater than the root's
-	// key, then it lies in right subtree
+	// jika akun lebih besar dari root->account maka yang di hapus adalah root sebalah kanan
 	else if (strcmp(akun, root->account) > 0)
 		root->rightPtr = delete (root->rightPtr, akun);
 
-	// if key is same as root's key,
-	// then This is the node
-	// to be deleted
+	// jika akun sama dengan root->account
 	else
 	{
+		//jika root kanan sama kiri adalah null
 		if (root->leftPtr == NULL && root->rightPtr == NULL)
 		{
 			free(root);
 			return NULL;
 		}
-		// node with only one child or no child
-		else if (root->leftPtr == NULL)
+		// jika hanya memiliki satu cabang atau tidak memiliki cabang
+		else if (root->leftPtr == NULL)//jika root sebelah kiri null
 		{
 			struct biodata *temp = root->rightPtr;
 			free(root);
 			return temp;
 		}
-		else if (root->rightPtr == NULL)
+		else if (root->rightPtr == NULL)//jika root sebelah kanan null
 		{
 			struct biodata *temp = root->leftPtr;
 			free(root);
@@ -1487,13 +1483,10 @@ struct biodata *delete (struct biodata *root, char akun[])
 		}
 		else
 		{
-			// node with two children:
-			// Get the inorder successor
-			// (smallest in the right subtree)
+			//jika terdapat 2 node yang sama maka akan di cari yang paling sesuai dengan isi data
 			struct biodata *temp = minValueNode(root->rightPtr);
-
-			// Copy the inorder
-			// successor's content to this node
+			
+			//inisialisasi temp kedalam root 
 			strcpy(root->account, temp->account);
 			strcpy(root->nama, temp->nama);
 			strcpy(root->NPM, temp->NPM);
@@ -1501,7 +1494,7 @@ struct biodata *delete (struct biodata *root, char akun[])
 			strcpy(root->tempatLahir, temp->tempatLahir);
 			strcpy(root->tanggalLahir, temp->tanggalLahir);
 
-			// Delete the inorder successor
+			// menghapus data yang sudah di dapat 
 			root->rightPtr = delete (root->rightPtr, temp->account);
 		}
 	}
