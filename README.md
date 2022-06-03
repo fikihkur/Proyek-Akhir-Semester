@@ -34,7 +34,7 @@ Fitur Administrator :
 <br /> 7. Administrator dapat keluar dari aplikasi dengan data perubahan yang tersimpan di dalam file
 
 Proyek ahir semester ini merupakan pengembangan dari proyek tengah semester kelompok kami. Untuk hal yang dikembangkan yaitu terdapat pada fitur mahasiswa poin 1 dan 2 serta 
-pada fitur administrator poin 5. Pengembangan tersebut dilakukan dengan prinsip Binary Search Tree (BST) dan menjadi salah satu kriteria penilaian proyek ini.
+pada fitur administrator poin 5. Pengembangan tersebut dilakukan dengan prinsip Binary Tree (BT) dan menjadi salah satu kriteria penilaian proyek ini.
 <br /> Untuk lebih jelasnya mengenai penjelasan program dapat menonton video penjelasan di bawah ini:
 <br /> https://youtu.be/GBnX0RQn22c
 
