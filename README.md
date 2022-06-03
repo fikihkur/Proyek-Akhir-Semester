@@ -1,15 +1,18 @@
 # Proyek-Akhir-Semester "E-Library"
 
+## Kelompok Pemrograman Lanjut Kelas 01
 Anggota Kelompok:
 <br /> Abdul Fikih Kurnia         (2106731200)
 <br /> Albertus Timothy Gunawan   (2106639472)
 <br /> Luthfi Misbachul Munir     (2106631961)
 
+## Pembukaan
 Assalamualaikum wr. wb. Salam sehat untuk kita semua. 
 <br />Terima kasih kepada Dr. Ruki Harwahyu, ST. MT. MSc sebagai dosen pengampu mata kuliah Pemrograman Lanjut untuk kelas 01 yang telah membimbing serta
 memberikan ilmu yang bermanfaat sehingga kami dapat menyelesaikan proyek akhir semester ini dengan baik sebab telah memenuhi semua 
 kriteria yang dipersyaratkan.
 
+## Penjelasam Program
 Kelompok kami mengusung ide berupa "E-Library", dimana program ini akan mengimpelementasikan sebuah sistem perpustakaan masa kini yang
 memiliki banyak sekali fitur di dalamnya dan tentunya akan bermanfaat bagi kita semua. Terdapat 2 fitur utama yaitu fitur login sebagai mahasiswa dan sebagai administrator, didalam fitur
 utama tersebutlah terdapat fitur fitur lainnya. Fitur-fiturnya yaitu sebagai berikut:
