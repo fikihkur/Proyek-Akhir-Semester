@@ -1,4 +1,4 @@
-# Proyek-Akhir-Semester
+# Proyek-Akhir-Semester "E-Library"
 
 Anggota Kelompok:
 <br /> Abdul Fikih Kurnia         (2106731200)
